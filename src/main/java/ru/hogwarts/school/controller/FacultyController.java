@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
 
-import java.util.stream.Stream;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("faculty")
@@ -46,7 +46,7 @@ public class FacultyController {
     }
 
     @GetMapping
-    public ResponseEntity<Stream<Faculty>> getAllStudents(String color) {
+    public ResponseEntity<Collection<Faculty>> getAllStudents(String color) {
         return ResponseEntity.ok(facultyService.getAllFaculties(color));
     }
 }
