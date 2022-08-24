@@ -1,18 +1,35 @@
 package ru.hogwarts.school.model;
 
+import org.springframework.data.annotation.Id;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import java.util.Objects;
 
+@Entity(name = "students")
 public class Student {
 
+
+    @javax.persistence.Id
+    @Column(name = "identifier", nullable = false)
+    private Long identifier;
+
+    @Id
+    @GeneratedValue
     private long id;
+
     private String name;
     private int age;
 
-    public Student(long id, String name, int age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
+    public Long getIdentifier() {
+        return identifier;
     }
+
+    public void setIdentifier(Long identifier) {
+        this.identifier = identifier;
+    }
+
 
     public long getId() {
         return id;
