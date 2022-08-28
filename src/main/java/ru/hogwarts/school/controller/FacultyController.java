@@ -8,7 +8,7 @@ import ru.hogwarts.school.service.FacultyService;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("faculty")
+@RequestMapping("/faculty")
 public class FacultyController {
 
     private final FacultyService facultyService;
@@ -17,13 +17,10 @@ public class FacultyController {
         this.facultyService = facultyService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Faculty> getBook(@PathVariable long id) {
-        Faculty faculty = facultyService.findFaculty(id);
-        if (faculty == null) {
-            ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(faculty);
+        facultyService.findFaculty(id);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping
@@ -33,14 +30,11 @@ public class FacultyController {
 
     @PutMapping
     public ResponseEntity<Faculty> editBook(@RequestBody Faculty faculty) {
-        Faculty foundFaculty =  facultyService.editFaculty(faculty);
-        if (foundFaculty == null) {
-            ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(foundFaculty);
+        facultyService.editFaculty(faculty);
+        return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Faculty> deleteBook(@PathVariable long id) {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
