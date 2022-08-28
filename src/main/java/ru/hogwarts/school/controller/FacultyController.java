@@ -19,8 +19,11 @@ public class FacultyController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Faculty> getBook(@PathVariable long id) {
-        facultyService.findFaculty(id);
-        return ResponseEntity.ok().build();
+        Faculty faculty = facultyService.findFaculty(id);
+        if (faculty == null) {
+            ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(faculty);
     }
 
     @PostMapping

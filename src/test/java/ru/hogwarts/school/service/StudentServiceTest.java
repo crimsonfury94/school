@@ -32,21 +32,22 @@ class StudentServiceTest {
     @InjectMocks
     private StudentService studentService;
 
-    @BeforeEach
-    public void beforeEach() {
-        List<Student> students = List.of(
-                new Student(1, "Harry Potter", 18),
-                new Student(2, "Luna Lovegood", 16),
-                new Student(3, "Cedric Diggory", 22),
-                new Student(4, "Ron Weasley", 18)
-
-        );
-        when(studentRepository.findAll()).thenReturn(students);
-    }
+//    @BeforeEach
+//    public void beforeEach() {
+//        List<Student> students = List.of(
+//                new Student(1, "Harry Potter", 18),
+//                new Student(2, "Luna Lovegood", 16),
+//                new Student(3, "Cedric Diggory", 22),
+//                new Student(4, "Ron Weasley", 18)
+//
+//        );
+//        when(studentRepository.findAll()).thenReturn(students);
+//    }
 
     @ParameterizedTest
     @MethodSource("ageParams")
     void createStudent(Student student) {
+
         studentRepository.save(student);
         assertThat(studentService.getAllStudents(18)).containsExactlyInAnyOrder(student);
     }

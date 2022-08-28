@@ -20,8 +20,11 @@ public class StudentController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable long id) {
-        studentService.findStudent(id);
-        return ResponseEntity.ok().build();
+        Student student = studentService.findStudent(id);
+        if (student == null) {
+            ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(student);
     }
 
     @PostMapping

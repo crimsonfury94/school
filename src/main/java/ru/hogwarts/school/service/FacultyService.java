@@ -21,8 +21,8 @@ public class FacultyService {
         return facultyRepository.save(faculty);
     }
 
-    public void findFaculty(long id) {
-        facultyRepository.findById(id).orElse(null);
+    public Faculty findFaculty(long id) {
+        return facultyRepository.findById(id).orElse(null);
     }
 
     public void editFaculty(Faculty faculty) {
