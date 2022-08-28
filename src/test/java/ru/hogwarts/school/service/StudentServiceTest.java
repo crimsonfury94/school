@@ -15,6 +15,7 @@ import ru.hogwarts.school.repositories.StudentRepository;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,7 +48,7 @@ class StudentServiceTest {
     @MethodSource("ageParams")
     void createStudent(Student student) {
         studentRepository.save(student);
-        assertThat(studentService.getAllStudents()).containsExactlyInAnyOrder(student);
+        assertThat(studentService.getAllStudents(18)).containsExactlyInAnyOrder(student);
     }
 
     @ParameterizedTest
@@ -73,13 +74,9 @@ class StudentServiceTest {
 
     @Test
     public void filterSecondTest() {
-        assertThat(studentService.getAllStudents(18)).containsAll( Map.of(
-                1, List.of(new Student(1, "Harry Potter", 18),
-                        new  Student(4, "Ron Weasley", 18)),
-                2, List.of(new  Student(2, "Luna Lovegood", 16)),
-
-                3, List.of( new  Student(3, "Cedric Diggory", 22)
-        )));
+        assertThat(studentService.getAllStudents(18)).containsExactlyInAnyOrderElementsOf(List.of(
+                new Student(1, "Harry Potter", 18),
+                        new  Student(4, "Ron Weasley", 18)));
     }
     public static Stream<Arguments> ageParams() {
 
